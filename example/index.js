@@ -3,7 +3,7 @@
 const cliche = require('../index')
 
 cliche({
-  name: 'example',
+  name: 'cliche-example',
   root: './app',
   routes: [
     'foo/bar',

@@ -1,0 +1,12 @@
+{
+  "name": "cliche-example",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A contrived sample app to demonstrate cliche usage",
+  "main": "index.js",
+  "dependencies": {
+    "glob": "^7.0.3"
+  },
+  "author": "Mal Graty <mal.graty@googlemail.com>",
+  "license": "ISC"
+}
