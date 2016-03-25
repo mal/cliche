@@ -95,6 +95,11 @@ describe('cliche', function () {
       assert.equal(out[0], 'usage: test-app <command> [<args>]')
     })
 
+    it('should render usage with subcommands', function () {
+      const out = capture(() => execute(['remote'], {name: 'test-app'}))
+      assert.equal(out[0], 'usage: test-app remote <command> [<args>]')
+    })
+
     it('should render about text', function () {
       const out = capture(() => execute(['remote']))
       assert.equal(out[2], 'remote about text')
