@@ -1,7 +1,12 @@
 'use strict'
 
+const spawn = require('child_process').spawn
+
 const command = function () {
-  console.error('version', '0.0.0')
+  spawn('git', ['describe', '--always'], {
+    cwd: __dirname,
+    stdio: 'inherit'
+  })
 }
 
 module.exports = command
