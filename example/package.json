@@ -5,6 +5,7 @@
   "description": "A contrived sample app to demonstrate cliche usage",
   "main": "index.js",
   "dependencies": {
+    "commander": "^2.9.0",
     "glob": "^7.0.3"
   },
   "author": "Mal Graty <mal.graty@googlemail.com>",
