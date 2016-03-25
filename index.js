@@ -90,8 +90,11 @@ const router = function (opts) {
     routes.push(route)
   }
 
+  const route = args.slice(0, max)
+  const name = [opts.name].concat(route).join(' ')
+
   if (routes.length === 1 && routes[0].length === max) {
-    return acquire(routes[0])(args.slice(max))
+    return acquire(routes[0])(args.slice(max), {name})
   }
 
   const inspect = function (route) {
@@ -104,11 +107,7 @@ const router = function (opts) {
     })
   }
 
-  const route = args.slice(0, max)
-  const self = Object.assign(inspect(route), {
-    name: [opts.name].concat(route).join(' ')
-  })
-
+  const self = Object.assign(inspect(route), {name})
   const meta = routes
     .map(r => r.pop())
     .filter((n, i, a) => a.indexOf(n) === i)

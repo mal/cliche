@@ -79,6 +79,11 @@ describe('cliche', function () {
       assert.equal(out[2], 'world')
     })
 
+    it('should pass other metadata', function () {
+      const out = execute(['commit'], {name: 'test-app'})
+      assert.equal(out[1].name, 'test-app commit')
+    })
+
     it('should display help when unable to route', function (done) {
       execute(['badgers'], {help: () => done()})
     })
