@@ -9,7 +9,7 @@ const execute = function (args, opts) {
   return cliche(Object.assign({root: './fixtures', routes, args}, opts))
 }
 
-const captureConsoleError = function (fn) {
+const capture = function (fn) {
   let data = []
   const conerr = console.error
   console.error = chunk => data += `${chunk}\n`
@@ -65,10 +65,9 @@ describe('cliche', function () {
 
   describe('router', function () {
     routes.forEach(route => {
-      const shuffledRoutes = routes.slice().sort(v => Math.random() * 2 - 1)
+      const shuffled = routes.slice().sort(v => Math.random() * 2 - 1)
       it(`should route ${route} correctly`, function () {
-        const out = execute(route.split('/'), {routes: shuffledRoutes})
-        assert.equal(out.length, 1)
+        const out = execute(route.split('/'), {routes: shuffled})
         assert.equal(out[0], `${route} fn`)
       })
     })
@@ -87,27 +86,27 @@ describe('cliche', function () {
 
   describe('usage', function () {
     it('should render usage information', function () {
-      const out = captureConsoleError(() => execute([], {name: 'test-app'}))
+      const out = capture(() => execute([], {name: 'test-app'}))
       assert.equal(out[0], 'usage: test-app <command> [<args>]')
     })
 
     it('should render about text', function () {
-      const out = captureConsoleError(() => execute(['remote']))
+      const out = capture(() => execute(['remote']))
       assert.equal(out[2], 'remote about text')
     })
 
     it('should render description when no about', function () {
-      const out = captureConsoleError(() => execute([]))
+      const out = capture(() => execute([]))
       assert.equal(out[2], 'app description')
     })
 
     it('should skip when no about or description', function () {
-      const out = captureConsoleError(() => execute(['bisect']))
+      const out = capture(() => execute(['bisect']))
       assert.equal(out[2], 'Available subcommands:')
     })
 
     it('should render subcommand information', function () {
-      const out = captureConsoleError(() => execute([]))
+      const out = capture(() => execute([]))
       assert.equal(out[6], '  add     add description')
       assert.equal(out[7], '  bisect  [no description available]')
       assert.equal(out[8], '  commit  commit description')
