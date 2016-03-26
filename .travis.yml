@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+ - "5"
+before_install:
+ - "npm install -g coveralls"
+before_script:
+ - "export PATH=$PWD/node_modules/.bin:$PATH"
+script:
+ - "istanbul cover _mocha --print none --report lcovonly"
+after_script:
+ - "cat ./coverage/lcov.info | coveralls"

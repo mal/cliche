@@ -1,0 +1,36 @@
+{
+  "name": "cliche",
+  "version": "1.0.0",
+  "description": "The simple lazy-loading command-line router",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "devDependencies": {
+    "istanbul": "^0.4.2",
+    "mocha": "^2.4.5"
+  },
+  "scripts": {
+    "test": "if [ -z $npm_config_cov ]; then mocha; else istanbul cover _mocha --print detail --report none; fi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mal/cliche.git"
+  },
+  "keywords": [
+    "cli",
+    "command",
+    "router",
+    "subcommand"
+  ],
+  "author": "Mal Graty <mal.graty@googlemail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mal/cliche/issues"
+  },
+  "homepage": "https://github.com/mal/cliche#readme"
+}
