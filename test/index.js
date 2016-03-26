@@ -9,6 +9,14 @@ const execute = function (args, opts) {
   return cliche(Object.assign({root: './fixtures', routes, args}, opts))
 }
 
+const args = function (args, fn) {
+  const argv = process.argv
+  process.argv = ['node', __filename, ...args]
+  const out = fn()
+  process.argv = argv
+  return out
+}
+
 const capture = function (fn) {
   let data = []
   const conerr = console.error
@@ -20,6 +28,19 @@ const capture = function (fn) {
 
 describe('cliche', function () {
   
+  describe('entry', function () {
+    it('should assume routes when given an array', function () {
+      const out = args(['fixtures', 'commit'], () => {
+        return cliche(['fixtures/add', 'fixtures/commit'])
+      })
+      assert.equal(out[0], 'commit fn')
+    })
+
+    it('should throw an error when no routes', function () {
+      assert.throws(() => cliche([]), Error)
+    })
+  })
+
   describe('inspect', function () {
     it('should use executable when no app name', function (done) {
       execute(['badgers'], {help: (self, subs) => {
