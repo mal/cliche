@@ -15,6 +15,7 @@
     "mocha": "^2.4.5"
   },
   "scripts": {
+    "prepublish": "git tag -a $npm_package_version -m $npm_package_version && git push --tags",
     "test": "if [ -z $npm_config_cov ]; then mocha; else istanbul cover _mocha --print detail --report none; fi"
   },
   "repository": {
