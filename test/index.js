@@ -33,7 +33,7 @@ describe('cliche', function () {
       const out = args(['fixtures', 'commit'], () => {
         return cliche(['fixtures/add', 'fixtures/commit'])
       })
-      assert.equal(out[0], 'commit fn')
+      assert.strictEqual(out[0], 'commit fn')
     })
 
     it('should throw an error when no routes', function () {
@@ -44,41 +44,41 @@ describe('cliche', function () {
   describe('inspect', function () {
     it('should use executable when no app name', function (done) {
       execute(['badgers'], {help: (self, subs) => {
-        assert.equal(self.name, process.argv[1])
+        assert.strictEqual(self.name, process.argv[1])
         done()
       }})
     })
 
     it('should use app name when available', function (done) {
       execute(['badgers'], {name: 'test-app', help: (self, subs) => {
-        assert.equal(self.name, 'test-app')
+        assert.strictEqual(self.name, 'test-app')
         done()
       }})
     })
 
     it('should use metadata files', function (done) {
       execute(['remote'], {help: (self, subs) => {
-        assert.equal(self.about, 'remote about text')
-        assert.equal(self.description, 'remote description')
+        assert.strictEqual(self.about, 'remote about text')
+        assert.strictEqual(self.description, 'remote description')
         done()
       }})
     })
 
     it('should tollerate missing metadata', function (done) {
       execute(['bisect'], {help: (self, subs) => {
-        assert.equal(self.about, undefined)
-        assert.equal(self.description, undefined)
+        assert.strictEqual(self.about, undefined)
+        assert.strictEqual(self.description, undefined)
         done()
       }})
     })
 
     it('should use metadata from subcommands', function (done) {
       execute(['remote'], {help: (self, subs) => {
-        assert.equal(subs.length, 2)
-        assert.equal(subs[0].name, 'add')
-        assert.equal(subs[0].description, 'remote/add description')
-        assert.equal(subs[1].name, 'remove')
-        assert.equal(subs[1].description, undefined)
+        assert.strictEqual(subs.length, 2)
+        assert.strictEqual(subs[0].name, 'add')
+        assert.strictEqual(subs[0].description, 'remote/add description')
+        assert.strictEqual(subs[1].name, 'remove')
+        assert.strictEqual(subs[1].description, undefined)
         done()
       }})
     })
@@ -89,20 +89,20 @@ describe('cliche', function () {
       const shuffled = routes.slice().sort(v => Math.random() * 2 - 1)
       it(`should route ${route} correctly`, function () {
         const out = execute(route.split('/'), {routes: shuffled})
-        assert.equal(out[0], `${route} fn`)
+        assert.strictEqual(out[0], `${route} fn`)
       })
     })
 
     it('should pass unused arguments', function () {
       const out = execute(['add', 'hello', 'world'])
-      assert.equal(out.length, 3)
-      assert.equal(out[1], 'hello')
-      assert.equal(out[2], 'world')
+      assert.strictEqual(out.length, 3)
+      assert.strictEqual(out[1], 'hello')
+      assert.strictEqual(out[2], 'world')
     })
 
     it('should pass other metadata', function () {
       const out = execute(['commit'], {name: 'test-app'})
-      assert.equal(out[1].name, 'test-app commit')
+      assert.strictEqual(out[1].name, 'test-app commit')
     })
 
     it('should display help when unable to route', function (done) {
@@ -113,42 +113,42 @@ describe('cliche', function () {
   describe('usage', function () {
     it('should render usage information', function () {
       const out = capture(() => execute([], {name: 'test-app'}))
-      assert.equal(out[0], 'usage: test-app <command> [<args>]')
+      assert.strictEqual(out[0], 'usage: test-app <command> [<args>]')
     })
 
     it('should render usage with subcommands', function () {
       const out = capture(() => execute(['remote'], {name: 'test-app'}))
-      assert.equal(out[0], 'usage: test-app remote <command> [<args>]')
+      assert.strictEqual(out[0], 'usage: test-app remote <command> [<args>]')
     })
 
     it('should render about text', function () {
       const out = capture(() => execute(['remote']))
-      assert.equal(out[2], 'remote about text')
+      assert.strictEqual(out[2], 'remote about text')
     })
 
     it('should render description when no about', function () {
       const out = capture(() => execute([]))
-      assert.equal(out[2], 'app description')
+      assert.strictEqual(out[2], 'app description')
     })
 
     it('should skip when no about or description', function () {
       const out = capture(() => execute(['bisect']))
-      assert.equal(out[2], 'Available subcommands:')
+      assert.strictEqual(out[2], 'Available subcommands:')
     })
 
     it('should render subcommand information', function () {
       const out = capture(() => execute([]))
-      assert.equal(out[6], '  add     add description')
-      assert.equal(out[7], '  bisect  [no description available]')
-      assert.equal(out[8], '  commit  commit description')
-      assert.equal(out[9], '  remote  remote description')
+      assert.strictEqual(out[6], '  add     add description')
+      assert.strictEqual(out[7], '  bisect  [no description available]')
+      assert.strictEqual(out[8], '  commit  commit description')
+      assert.strictEqual(out[9], '  remote  remote description')
     })
   })
 
   describe('version', function () {
     it('should display info from version file', function () {
       const out = execute(['--version'])
-      assert.equal(out, '0.0.0')
+      assert.strictEqual(out, '0.0.0')
     })
 
     it('should tollerate missing version file', function (done) {
