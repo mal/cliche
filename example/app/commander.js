@@ -11,12 +11,12 @@ const run = function (args, opts) {
     .option('-d, --dates', 'Add dates')
     .parse(['node', opts.name].concat(args))
 
-  console.log('You fruit salad will have:');
+  console.log('You fruit salad will have:')
   const list = []
-  if (program.apples) list.push('  - apples');
-  if (program.bananas) list.push('  - bananas');
-  if (program.cherries) list.push('  - cherries');
-  if (program.dates) list.push('  - dates');
+  if (program.apples) list.push('  - apples')
+  if (program.bananas) list.push('  - bananas')
+  if (program.cherries) list.push('  - cherries')
+  if (program.dates) list.push('  - dates')
   if (list.length === 0) {
     list.push('  - nothing')
   }

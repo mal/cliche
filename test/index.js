@@ -27,7 +27,6 @@ const capture = function (fn) {
 }
 
 describe('cliche', function () {
-  
   describe('entry', function () {
     it('should assume routes when given an array', function () {
       const out = args(['fixtures', 'commit'], () => {
