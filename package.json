@@ -1,6 +1,6 @@
 {
   "name": "cliche",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "The simple lazy-loading command-line router",
   "main": "index.js",
   "files": [

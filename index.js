@@ -7,12 +7,13 @@ const acquirer = function (base) {
 
   const limit = Error.stackTraceLimit
   Error.stackTraceLimit = 1
-  Error.captureStackTrace(error, cliche)
-  Error.stackTraceLimit = limit
-
   const trace = Error.prepareStackTrace
   Error.prepareStackTrace = (_, stack) => stack
+
+  Error.captureStackTrace(error, cliche)
   const stack = error.stack
+
+  Error.stackTraceLimit = limit
   Error.prepareStackTrace = trace
 
   const root = path.resolve(stack[0].getFileName(), '..', base)
